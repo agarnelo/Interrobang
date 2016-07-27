@@ -48,3 +48,5 @@ class Comment(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     creator = models.CharField(max_length=40, null=False) #username
     #cEvent = models.ForeignKey(Event)
+
+#http://tutorial.djangogirls.org/en/django_forms/

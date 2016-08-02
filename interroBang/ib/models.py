@@ -1,9 +1,10 @@
 from django.db import models
+from django.utils import timezone
 
 # Create your models here.
 
 class User(models.Model):
-    username = models.CharField(max_length=40, null=False, unique=True)
+    username = models.CharField(max_length=40, null=False, unique=True, default="")
     #    passwordHash =
     #(Note: pip install bcrypt in webenv)
     #https://ghrhome.gitbooks.io/djangoknowhow/content/password_management_in_django/using_bcrypt_with_django.html
@@ -11,7 +12,12 @@ class User(models.Model):
     fName = models.CharField(max_length=35, null=False)
     lname = models.CharField(max_length=35, null=False)
     email = models.EmailField(max_length=70, null=False, unique=True)
-    registration = models.DateField(auto_now_add=True)
+    registration = models.DateTimeField(auto_now_add=True)
+
+    def __unicode__(self):
+        return self.username
+    def __str__(self):
+        return self.username
 
 class Friend(models.Model):
     #friends list
@@ -62,7 +68,7 @@ class Comment(models.Model):
 
 class Photo(models.Model):
     #https://coderwall.com/p/bz0sng/simple-django-image-upload-to-model-imagefield
-    imagePath = models.ImageField(upload_to="/photos", default="photo/none/noimg.jpg")
+    # imagePath = models.ImageField(upload_to="/photos", default="photo/none/noimg.jpg")
     iEvent = models.ForeignKey(Event)
 
 class Note(models.Model):

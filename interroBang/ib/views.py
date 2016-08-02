@@ -1,4 +1,6 @@
 from django.http import HttpResponse
+from django.shortcuts import render
 
-def index(request):
-    return HttpResponse("<h1>hello</h1>")
+def signup(request):
+    #Here we will get the signup info from the html page
+    return render(request,"index.html", {})

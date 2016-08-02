@@ -29,9 +29,9 @@ class Notification(models.Model):
     tripAdd = 1
     newFriend = 2
     newComment = 3
-    nTypes = ((0, 'site_alert'),
-              (1, 'trip_add'),
-              (2, 'new_friend'),
-              (3, 'new_comment'))
+    nTypes = ((0, 'siteAlert'),
+              (1, 'tripAdd'),
+              (2, 'newFriend'),
+              (3, 'newComment'))
     type = models.IntegerField(choices=nTypes, null=False, blank=True, default=0)
     receiver = models.ForeignKey(User, on_delete=models.CASCADE, blank=False)

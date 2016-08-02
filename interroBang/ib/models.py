@@ -16,9 +16,6 @@ class User(models.Model):
 class Friend(models.Model):
     #friends list
     fDate = models.DateField(auto_now_add=True)
-
-
-
     
 class Dest(models.Model):
     name = models.CharField(max_length=50)
@@ -28,8 +25,25 @@ class Trip(models.Model):
     start = models.DateTimeField()
     end = models.DateTimeField()
     creator = models.CharField(max_length=35)
-    dests = models.ManyToManyField(Dest, on_delete = models.CASCADE)
-    travelers = models.ManyToManyField(User, on_delete = models.CASCADE)
+    dests = models.ManyToManyField(Dest)
+    travelers = models.ManyToManyField(User)
+
+class Location(models.Model):
+    lName = models.CharField(max_length=50, null=False)
+    restaurant = 1
+    museum = 2
+    hotel = 3
+    cafe = 4
+    leisure = 5
+    lType_choices = (
+        (0, 'restaurant'),
+        (1, 'museum'),
+        (2, 'hotel'),
+        (3, 'cafe'),
+        (4, 'leisure'),
+    )
+    lType = models.IntegerField(choices=lType_choices, null=False, blank=True, default=4)
+    city = models.ForeignKey(Dest, on_delete = models.CASCADE)
 
 class Event(models.Model):
     text = models.CharField(max_length=500)
@@ -50,25 +64,6 @@ class Photo(models.Model):
     #https://coderwall.com/p/bz0sng/simple-django-image-upload-to-model-imagefield
     imagePath = models.ImageField(upload_to="/photos", default="photo/none/noimg.jpg")
     iEvent = models.ForeignKey(Event)
-
-
-class Location(models.Model):
-    lName = models.CharField(max_length=50, null=False)
-    restaurant = 1
-    museum = 2
-    hotel = 3
-    cafe = 4
-    leisure = 5
-    lType_choices = (
-        (0, 'restaurant'),
-        (1, 'museum'),
-        (2, 'hotel'),
-        (3, 'cafe'),
-        (4, 'leisure'),
-    )
-    lType = models.IntegerField(choices=lType_choices, null=False, blank=True, default=4)
-    city = models.ForeignKey(Dest, on_delete = models.CASCADE)
-
 
 class Note(models.Model):
     content = models.CharField(max_length=250)

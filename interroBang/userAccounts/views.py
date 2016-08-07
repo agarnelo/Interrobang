@@ -1,6 +1,10 @@
-from django.http import HttpResponse
+from allauth.accounts.views import SignupView
+from allauth.accounts.forms import LoginForm
 from django.shortcuts import render
 
-def signup(request):
-    #Here we will get the signup info from the html page
-    return render(request,"index.html", {})
+class denoeSignUpView(SignupView):
+    def getContext(self, **kwargs):
+        context = super(denoeSignUpView, self).getContext(**kwargs)
+        context['login_form'] = LoginForm()
+        return context
+

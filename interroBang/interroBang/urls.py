@@ -15,9 +15,16 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+from django.contrib.sites.models import Site
+from django.views.generic import TemplateView
 
 
 urlpatterns = [
+    url(r'^accounts/', include('allauth.urls')),
+    url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^admin/', admin.site.urls),
-    url(r'^signup/', include("userAccounts.urls"))
+    url(r'^$', TemplateView.as_view(template_name="index.html")),
+    # url(r'^accounts/profile/', ProfileView.as_view(), name='profile')
+
+
 ]

@@ -32,12 +32,23 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'django.contrib.admin',
+
+    'django.contrib.admindocs',
+
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'userAccounts',
+
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.facebook',
+
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -56,7 +67,7 @@ ROOT_URLCONF = 'interroBang.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -64,6 +75,11 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.request', #added
+                # 'django.core.context_processors.request',
+                # 'django.contrib.auth.context_processors.auth',
+                # 'allauth.account.context_processors.account',
+                # # 'allauth.socialaccount.context_processors.socialaccount'
             ],
         },
     },
@@ -112,15 +128,24 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-PASSWORD_HASHERS = (
-    'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
-    'django.contrib.auth.hashers.BCryptPasswordHasher',
-    'django.contrib.auth.hashers.PBKDF2PasswordHasher',
-    'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
-    'django.contrib.auth.hashers.SHA1PasswordHasher',
-    'django.contrib.auth.hashers.MD5PasswordHasher',
-    'django.contrib.auth.hashers.CryptPasswordHasher',
+AUTHENTICATION_BACKENDS = (
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
 )
+
+#
+# PASSWORD_HASHERS = (
+#     'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
+#     'django.contrib.auth.hashers.BCryptPasswordHasher',
+#     'django.contrib.auth.hashers.PBKDF2PasswordHasher',
+#     'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
+#     'django.contrib.auth.hashers.SHA1PasswordHasher',
+#     'django.contrib.auth.hashers.MD5PasswordHasher',
+#     'django.contrib.auth.hashers.CryptPasswordHasher',
+# )
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
@@ -140,3 +165,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
 STATIC_URL = '/static/'
+
+SITE_ID = 2
+
+LOGIN_REDIRECT_URL = '/'
+SOCIALACCOUNT_QUERY_EMAIL = True
+SOCIALACCOUNT_PROVIDERS = {
+    'facebook': {
+        'SCOPE': ['email', 'publish_stream'],
+        'METHOD': 'js_sdk'  # instead of 'oauth2'
+    }
+}

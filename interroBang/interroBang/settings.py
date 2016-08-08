@@ -168,11 +168,11 @@ STATIC_URL = '/static/'
 
 SITE_ID = 2
 
-LOGIN_REDIRECT_URL = '/'
+# LOGIN_REDIRECT_URL = '/'
 SOCIALACCOUNT_QUERY_EMAIL = True
 SOCIALACCOUNT_PROVIDERS = {
     'facebook': {
-        'SCOPE': ['email', 'publish_stream'],
+        'SCOPE': ['email', 'public_profile'],
         'METHOD': 'js_sdk'  # instead of 'oauth2'
     }
 }

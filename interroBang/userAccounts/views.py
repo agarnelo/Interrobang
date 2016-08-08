@@ -8,3 +8,4 @@ class denoeSignUpView(SignupView):
         context['login_form'] = LoginForm()
         return context
 
+

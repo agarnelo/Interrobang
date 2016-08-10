@@ -4,9 +4,9 @@
 {% block content %}
 
 {% if user %}
-    <h1>Welcome, {{user.first_name}} {{user.last_name}}</h1>
-    <p>Following is the Extra information that facebook has provided to allauth:</p>
+    <h1>Welcome, {{user.first_name}} {{user.last_name}} </h1>
     {% for account in user.socialaccount_set.all %}
+        <p>Following is the Extra information that facebook has provided to allauth:</p>
         <h2 style="text-transform:capitalize;">{{ account.provider }} account data</h2>
         <p><img width="50" height="50" src="{{ account.get_avatar_url }}" /></p>
         <p>UID: <a href="{{account.extra_data.link }}">{{ account.uid }}</a></p>

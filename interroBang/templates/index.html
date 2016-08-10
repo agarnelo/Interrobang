@@ -1,6 +1,19 @@
 {% extends "base.html" %}
 {% block content %}
+    {% if user.is_authenticated %} <p> Logged In <p>
+        <strong> Mesaages: </strong>
+        {% if messages %}
+            <div>
+                <ul>
+                    {% for message in messages%}
+                        <li> {{message }} </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% else %}
+            <p> No messages </p>
+        {% endif %}
+    {% endif %}
 
- Denoe
 
 {% endblock content %}

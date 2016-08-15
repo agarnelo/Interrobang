@@ -4,7 +4,9 @@
 {% block content %}
 
 {% if user %}
-    <h1>Welcome, {{user.first_name}} {{user.last_name}} </h1>
+    <h1>Welcome, {{user.first_name}} {{user.last_name}} {{ user }} {{ user.id }} {{user.username}} {{profile.trip}}{% if user.profile %} {{user.profile.trip}}  {% else %} No trips {% endif %}
+    {{ user.date_joined }} {{user.last_login}}
+    </h1>
     {% for account in user.socialaccount_set.all %}
         <p>Following is the Extra information that facebook has provided to allauth:</p>
         <h2 style="text-transform:capitalize;">{{ account.provider }} account data</h2>

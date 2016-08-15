@@ -22,4 +22,6 @@ def logout(request):
     logout(request)
     return redirect('index')
 
+
+
 #http://stackoverflow.com/questions/32292769/django-user-logout-fails-to-redirect-homepage

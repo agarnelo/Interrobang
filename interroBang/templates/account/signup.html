@@ -1,4 +1,7 @@
+
+
 {% extends "base.html" %}
+{% load static %}
 
 {% load i18n %}
 
@@ -8,6 +11,9 @@
 <h1>{% trans "Sign Up" %}</h1>
 
 <p>{% blocktrans %}Hello, already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
+
+<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
+
 
 <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
   {% csrf_token %}

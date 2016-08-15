@@ -40,14 +40,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
-    'userAccounts',
-
     'django.contrib.sites',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.facebook',
+    'userAccounts',
 
 ]
 
@@ -170,13 +168,13 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
 
 
 
-SITE_ID = 2
+SITE_ID = 3
 
 # LOGIN_REDIRECT_URL = '/'
 SOCIALACCOUNT_QUERY_EMAIL = True
 SOCIALACCOUNT_PROVIDERS = {
     'facebook': {
-        'SCOPE': ['email', 'public_profile'],
+        'SCOPE': ['email', 'public_profile', 'user_friends'],
         'METHOD': 'js_sdk'  # instead of 'oauth2'
     }
 }
@@ -184,3 +182,11 @@ SOCIALACCOUNT_PROVIDERS = {
 ACCOUNT_LOGOUT_ON_GET = True
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+ACCOUNT_USERNAME_REQUIRED = True
+
+# ACCOUNT_SIGNUP_FORM_CLASS = 'userAccounts.forms.SignupForm'
+# AUTH_PROFILE_MODULE = 'userAccounts.UserProfile'
+
+ACCOUNT_SIGNUP_FORM_CLASS = 'userAccounts.forms.SignupForm'
+AUTH_USER_MODEL = 'auth.User'

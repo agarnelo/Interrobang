@@ -1,0 +1,15 @@
+bcrypt==3.1.0
+cffi==1.7.0
+defusedxml==0.4.1
+Django==1.9.8
+django-allauth==0.26.1
+django-mako-plus==3.3.16
+Mako==1.0.4
+MarkupSafe==0.23
+oauthlib==1.1.2
+psycopg2==2.6.2
+pycparser==2.14
+python3-openid==3.0.10
+requests==2.10.0
+requests-oauthlib==0.6.2
+six==1.10.0

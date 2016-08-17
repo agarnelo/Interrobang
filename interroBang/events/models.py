@@ -1,7 +1,9 @@
+
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import pre_save
 from django.utils.text import slugify
+from django.utils import timezone
 
 
 # Create your models here.
@@ -11,8 +13,8 @@ class EventManager(models.Manager):
         return super(EventManager, self).filter(draft=False).filter(publish__lte=timezone.now())
 
 def upload_location(instance, filename):
-    PostModel = instance.__class__
-    new_id = PostModel.objects.order_by("id").last().id + 1
+    EventModel = instance.__class__
+    new_id = EventModel.objects.order_by("id").last().id + 1
     return "%s/%s" %(new_id, filename)
 
 class Event(models.Model):
@@ -48,7 +50,7 @@ def create_slug(instance, new_slug=None):
     slug = slugify(instance.title)
     if new_slug is not None:
         slug = new_slug
-    qs = Post.objects.filter(slug=slug).order_by("-id")
+    qs = Event.objects.filter(slug=slug).order_by("-id")
     exists = qs.exists()
     if exists:
         new_slug = "%s-%s" %(slug, qs.first().id)

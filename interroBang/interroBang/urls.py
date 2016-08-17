@@ -19,8 +19,8 @@ from django.contrib.sites.models import Site
 
 
 urlpatterns = [
-    url(r'^', include("userAccounts.urls")),
-
     url(r'^accounts/', include('allauth.urls')),
     url(r'^admin/', admin.site.urls),
+    url(r'^events/', include("events.urls", namespace='events')),
+    url(r'^', include("userAccounts.urls")),
 ]

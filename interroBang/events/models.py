@@ -1,9 +1,15 @@
+from __future__ import unicode_literals
 
+from django.conf import settings
+from django.core.urlresolvers import reverse
 from django.db import models
-from django.contrib.auth.models import User
 from django.db.models.signals import pre_save
-from django.utils.text import slugify
 from django.utils import timezone
+from django.utils.safestring import mark_safe
+from django.utils.text import slugify
+
+from django.contrib.contenttypes.models import ContentType
+
 
 
 # Create your models here.
@@ -18,7 +24,7 @@ def upload_location(instance, filename):
     return "%s/%s" %(new_id, filename)
 
 class Event(models.Model):
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL)
     title = models.CharField(max_length=120)
     slug = models.SlugField(unique=True)
     image = models.ImageField(upload_to=upload_location,

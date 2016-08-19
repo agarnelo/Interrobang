@@ -48,8 +48,17 @@ class Event(models.Model):
     def __str__(self):
         return self.title
 
+    def get_absolute_url(self):
+        return reverse("events:detail", kwargs={"slug": self.slug})
+
     class Meta:
         ordering = ["-timestamp", "-updated"]
+
+    @property
+    def get_content_type(self):
+        instance = self
+        content_type = ContentType.objects.get_for_model(instance.__class__)
+        return content_type
 
 
 def create_slug(instance, new_slug=None):

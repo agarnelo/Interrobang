@@ -9,6 +9,7 @@ from django.utils.safestring import mark_safe
 from django.utils.text import slugify
 
 from django.contrib.contenttypes.models import ContentType
+from comments.models import Comment
 
 
 
@@ -53,6 +54,12 @@ class Event(models.Model):
 
     class Meta:
         ordering = ["-timestamp", "-updated"]
+
+    @property
+    def comments(self):
+        instance = self
+        qs = Comment.objects.filter_by_instance(instance)
+        return qs
 
     @property
     def get_content_type(self):
